@@ -19,3 +19,9 @@ WalletTracker.py establishes a websocket with Alchemy's Ethereum Node as a Servi
 ### Example command 
 
 `python3 ./monitor.py --address <Ethereum address> --alchemy <Alchemy API Key>`
+
+---------------------------------------------------
+
+### TODO
+
+1. Add in wallet history for given wallet
