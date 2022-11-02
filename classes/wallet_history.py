@@ -1,3 +1,5 @@
+# Under Development
+
 import requests
 import json
 
@@ -33,7 +35,3 @@ class Wallet_History:
         response = requests.post(self.eth_endpoint,json=payload,headers=headers)
         res_dict = json.loads(response.text)
         return res_dict['result']['transfers']
-
-history = Wallet_History('0x3497064849E99BdFcf53a88264574c092F220012','UVHHDJ5JKlrWfH7sqJKxu9HDXPcMmrcL')
-wallet_history = history.fetch_wallet_history(["external","erc20"])
-print(len(wallet_history))
