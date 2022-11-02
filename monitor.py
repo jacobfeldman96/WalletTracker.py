@@ -9,18 +9,17 @@ parser.add_argument("--history", help="Optional flag to review wallet's history"
 # parser.add_argument("--assets", nargs='*', help="Required flag for asset history. Examples: external, internal, erc20, erc721, erc1155, or special nft")
 
 args = parser.parse_args()
-# print(args)
 
 def main():
     if args.history == None:
         while True:
             active_monitor = wallet_class.Wallet_Movements(args.address, args.alchemy)
             watch_wallet = active_monitor.watch_wallet()
-            if watch_wallet == "No movement this block":
+            if watch_wallet == "No movement in this block":
                 print(watch_wallet)
                 pass
             else:
-                print(active_monitor.movement_list[-1])
+                print(active_monitor.movement_list)
                 pass
     else:
         history = wallet_history.Wallet_History(args.address, args.alchemy)

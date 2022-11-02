@@ -25,6 +25,7 @@ class Wallet_Movements:
         # print(transactions)
         for i in transactions:
             txns_in_block = w3.eth.get_transaction(i)
+            # print(txns_in_block)
             if txns_in_block['from'] == self.address:
                 txns_dict = {}
                 txns_dict['event'] = 'out'
@@ -33,16 +34,20 @@ class Wallet_Movements:
                 txns_dict['to'] = txns_in_block['to']
                 txns_dict['amount'] = txns_in_block['value']
                 self.movement_list.append(txns_dict)
-            elif txns_in_block['to'] == self.address:
-                txns_dict = {}
-                txns_dict['event'] = 'in'
-                txns_dict['txn hash'] = HexBytes.hex(i)
-                txns_dict['from'] = txns_in_block['from']
-                txns_dict['to'] = txns_in_block['to']
-                txns_dict['amount'] = txns_in_block['value']
-                self.movement_list.append(txns_dict)
+            elif 'to' in txns_in_block:
+                if txns_in_block['to'] == self.address: 
+                    txns_dict = {}
+                    txns_dict['event'] = 'in'
+                    txns_dict['txn hash'] = HexBytes.hex(i)
+                    txns_dict['from'] = txns_in_block['from']
+                    txns_dict['to'] = txns_in_block['to']
+                    txns_dict['amount'] = txns_in_block['value']
+                    self.movement_list.append(txns_dict)
+                else:
+                    pass
             else:
                 pass
+
         return self.to_json() 
                 
     def to_json(self):
@@ -50,4 +55,4 @@ class Wallet_Movements:
             data = json.dumps(self.movement_list)
             return data
         else:
-            return "No movement this block"
+            return "No movement in this block"
