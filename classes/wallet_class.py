@@ -22,14 +22,12 @@ class Wallet_Movements:
     def watch_wallet(self):
         transactions = self.fetch_latest_block_transactions()
         w3 = self.auth()
-        # print(transactions)
         for i in transactions:
             txns_in_block = w3.eth.get_transaction(i)
-            # print(txns_in_block)
             if txns_in_block['from'] == self.address:
                 txns_dict = {}
-                txns_dict['event'] = 'out'
                 txns_dict['txn hash'] = HexBytes.hex(i)
+                txns_dict['event'] = 'out'
                 txns_dict['from'] = txns_in_block['from']
                 txns_dict['to'] = txns_in_block['to']
                 txns_dict['amount'] = txns_in_block['value']
@@ -37,8 +35,8 @@ class Wallet_Movements:
             elif 'to' in txns_in_block:
                 if txns_in_block['to'] == self.address: 
                     txns_dict = {}
-                    txns_dict['event'] = 'in'
                     txns_dict['txn hash'] = HexBytes.hex(i)
+                    txns_dict['event'] = 'in'
                     txns_dict['from'] = txns_in_block['from']
                     txns_dict['to'] = txns_in_block['to']
                     txns_dict['amount'] = txns_in_block['value']
