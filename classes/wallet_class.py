@@ -51,11 +51,11 @@ class Wallet_Movements:
             return "No movement in this block"
 
         elif len(self.movement_list) > current_length:
-            returning_data = []
+            latest_transactions = []
             for i in range(len(self.movement_list)):
                 if i > current_length:
-                    returning_data.append(i)
-            return returning_data
+                    latest_transactions.append(i)
+            return latest_transactions
 
         else:
             return "No movement in this block"
