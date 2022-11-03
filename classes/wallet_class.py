@@ -20,6 +20,7 @@ class Wallet_Movements:
         return latest_transactions
 
     def watch_wallet(self):
+        current_length = len(self.movement_list)
         transactions = self.fetch_latest_block_transactions()
         w3 = self.auth()
         for i in transactions:
@@ -31,7 +32,7 @@ class Wallet_Movements:
                 txns_dict['from'] = txns_in_block['from']
                 txns_dict['to'] = txns_in_block['to']
                 txns_dict['amount'] = txns_in_block['value']
-                self.movement_list.append(txns_dict)
+                self.movement_list.append(json.dumps(txns_dict))
             elif 'to' in txns_in_block:
                 if txns_in_block['to'] == self.address: 
                     txns_dict = {}
@@ -40,17 +41,22 @@ class Wallet_Movements:
                     txns_dict['from'] = txns_in_block['from']
                     txns_dict['to'] = txns_in_block['to']
                     txns_dict['amount'] = txns_in_block['value']
-                    self.movement_list.append(txns_dict)
+                    self.movement_list.append(json.dumps(txns_dict))
                 else:
                     pass
             else:
                 pass
 
-        return self.to_json() 
-                
-    def to_json(self):
-        if len(self.movement_list) != 0:
-            data = json.dumps(self.movement_list)
-            return data
+        if len(self.movement_list) == 0:
+            return "No movement in this block"
+
+        elif len(self.movement_list) > current_length:
+            returning_data = []
+            for i in range(len(self.movement_list)):
+                if i > current_length:
+                    returning_data.append(i)
+            return returning_data
+
         else:
             return "No movement in this block"
+        
