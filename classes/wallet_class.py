@@ -55,6 +55,8 @@ class Wallet_Movements:
             for i in range(len(self.movement_list)):
                 if i > current_length:
                     latest_transactions.append(i)
+                else:
+                    pass
             return latest_transactions
 
         else:

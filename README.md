@@ -1,4 +1,4 @@
-# WalletTracker.py
+`# WalletTracker.py
 Keep an eye on those sus wallets...
 
 ### What it does?
@@ -18,10 +18,11 @@ WalletTracker.py establishes a websocket with Alchemy's Ethereum Node as a Servi
 
 ### Example command 
 
-`python3 ./monitor.py --address <Ethereum address> --alchemy <Alchemy API Key>`
+`python3 ./monitor.py --address <Ethereum address> --alchemy <Alchemy API Key> --history <Bool> --assets <Asset Type> --asset_name = <Crypto Ticker>`
 
 ---------------------------------------------------
 
 ### TODO
 
-1. Add in wallet history for given wallet
+1. Add in graph representation of wallet interactions
+`
