@@ -24,5 +24,5 @@ WalletTracker.py establishes a websocket with Alchemy's Ethereum Node as a Servi
 
 ### TODO
 
-1. Add in graph representation of wallet interactions
-`
+1. Add in capability to look through entire blockchain history - max queries for transaction history api is 1k.
+2. Add in graph representation of wallet interactions
